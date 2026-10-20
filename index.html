@@ -4,116 +4,70 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Zero Prime | Login & Sign Up</title>
+<title>Zero Prime</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
+*{box-sizing:border-box}
 body{
-  font-family:Arial,sans-serif;
-  background:linear-gradient(135deg,#020617,#0b1e48);
-  color:#fff;min-height:100vh;
-  display:flex;align-items:center;justify-content:center;
-  padding:20px
+  margin:0;min-height:100vh;display:flex;
+  align-items:center;justify-content:center;padding:20px;
+  font-family:Arial,sans-serif;color:white;
+  background:linear-gradient(135deg,#020617,#12356b)
 }
-.container{
-  width:100%;max-width:430px;padding:30px;
-  background:#0b1730;border:1px solid #1e40af;
-  border-radius:20px;box-shadow:0 15px 50px #0008
+.card{
+  width:100%;max-width:420px;padding:28px;
+  background:#0b1730;border:1px solid #2563eb;
+  border-radius:18px;box-shadow:0 15px 45px #0005
 }
-.logo{text-align:center;font-size:30px;font-weight:bold;margin-bottom:8px}
-.logo span{color:#38bdf8}
-.subtitle{text-align:center;color:#a9b8d4;margin-bottom:25px}
-.tabs{display:flex;gap:10px;margin-bottom:22px}
-.tabs button{
-  flex:1;padding:12px;border:1px solid #334155;
-  background:#111f3b;color:#fff;border-radius:9px;cursor:pointer
-}
-.tabs button.active{background:#2563eb;border-color:#2563eb}
-h2{margin-bottom:8px}
-.description{color:#a9b8d4;margin-bottom:20px;font-size:14px}
+h1{text-align:center;color:#38bdf8}
+p{text-align:center;color:#cbd5e1}
 input{
-  display:block;width:100%;padding:14px;margin-bottom:14px;
-  border:1px solid #334b72;border-radius:9px;
-  background:#071126;color:white;font-size:15px;outline:none
+  display:block;width:100%;padding:13px;margin:12px 0;
+  background:#071126;color:white;border:1px solid #334155;
+  border-radius:8px;font-size:16px
 }
-input:focus{border-color:#38bdf8}
-.main-btn{
-  width:100%;padding:14px;background:#2563eb;color:white;
-  border:0;border-radius:9px;font-size:16px;font-weight:bold;
-  cursor:pointer;margin-top:4px
+button{
+  width:100%;padding:13px;margin-top:10px;
+  background:#2563eb;color:white;border:0;
+  border-radius:8px;font-size:16px;cursor:pointer
 }
-.main-btn:disabled{opacity:.6;cursor:wait}
-.links{text-align:center;margin-top:18px;font-size:14px;color:#b9c6dc}
-a{color:#38bdf8;cursor:pointer;text-decoration:none}
-a:hover{text-decoration:underline}
-#message{
-  display:none;margin:15px 0;padding:12px;border-radius:8px;
-  font-size:14px;overflow-wrap:anywhere
-}
-#dashboard{text-align:center}
-#dashboard p{margin:15px 0;color:#bdc9df}
-.footer{text-align:center;color:#7185a8;font-size:12px;margin-top:25px}
+.secondary{background:#1e293b}
+a{color:#38bdf8;cursor:pointer}
+#message{overflow-wrap:anywhere;font-size:14px}
 </style>
 </head>
 
 <body>
-<div class="container">
-  <div class="logo">UM <span>Zero Prime</span></div>
-  <div class="subtitle">Your ideas. Our platform.</div>
+<div class="card">
+  <h1>Zero Prime</h1>
+  <p>Your account, your world.</p>
 
-  <div id="authArea">
-    <div class="tabs">
-      <button id="loginTab" class="active" type="button">Login</button>
-      <button id="signupTab" type="button">Sign Up</button>
+  <form id="authForm">
+    <input id="name" placeholder="Full Name" hidden>
+    <input id="email" type="email" placeholder="Email Address" required>
+    <input id="password" type="password" placeholder="Password"
+           minlength="6" required>
+
+    <div id="confirmWrap" hidden>
+      <input id="confirm" type="password"
+             placeholder="Confirm Password" minlength="6">
     </div>
 
-    <h2 id="formTitle">Welcome Back!</h2>
-    <p class="description" id="formDescription">
-      Login to your account
-    </p>
+    <button id="submit" type="submit">Login</button>
+  </form>
 
-    <form id="authForm">
-      <input id="name" type="text" placeholder="Full Name"
-             autocomplete="name" hidden>
+  <button id="toggle" class="secondary" type="button">
+    Create New Account / Sign Up
+  </button>
 
-      <input id="email" type="email" placeholder="Email Address"
-             autocomplete="email" required>
+  <p><a href="#" id="forgot">Forgot Password?</a></p>
+  <p id="message" role="status" aria-live="polite"></p>
 
-      <input id="password" type="password" placeholder="Password"
-             autocomplete="current-password" minlength="6" required>
-
-      <div id="confirmWrap" hidden>
-        <input id="confirmPassword" type="password"
-               placeholder="Confirm Password"
-               autocomplete="new-password" minlength="6">
-      </div>
-
-      <div id="forgotRow" style="text-align:right;margin-bottom:18px">
-        <a id="forgotLink" href="#">Forgot Password?</a>
-      </div>
-
-      <button id="submitBtn" class="main-btn" type="submit">
-        Login
-      </button>
-    </form>
-
-    <div id="message" role="status" aria-live="polite"></div>
-
-    <div class="links" id="switchText">
-      Don't have an account? <a id="switchLink" href="#">Sign Up</a>
-    </div>
-  </div>
-
-  <div id="dashboard" hidden>
+  <div id="account" hidden>
     <h2>Welcome to Zero Prime!</h2>
-    <p id="userEmail"></p>
-    <p>Your account is signed in successfully.</p>
-    <button id="logoutBtn" class="main-btn" type="button">
-      Logout
-    </button>
+    <p id="welcome"></p>
+    <button id="logout" type="button">Logout</button>
   </div>
-
-  <div class="footer">© 2026 Zero Prime. All rights reserved.</div>
 </div>
 
 <script type="module">
@@ -121,178 +75,12 @@ import { initializeApp }
   from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
 
 import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  sendPasswordResetEmail,
-  updateProfile,
-  onAuthStateChanged,
-  signOut
+  getAuth, createUserWithEmailAndPassword,
+  signInWithEmailAndPassword, sendPasswordResetEmail,
+  updateProfile, onAuthStateChanged, signOut
 } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-auth.js";
 
-/* STEP 1: Replace this with your Firebase Web App config */
-const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-  projectId: "YOUR_PROJECT_ID",
-  appId: "YOUR_APP_ID"
-};
-
-/* STEP 2: Connect Firebase */
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-
-const $ = id => document.getElementById(id);
-
-let mode = "login";
-let busy = false;
-
-function showMessage(text, success = false) {
-  $("message").textContent = text;
-  $("message").style.display = "block";
-  $("message").style.color = success ? "#86efac" : "#fca5a5";
-  $("message").style.background = success ? "#123526" : "#401c2a";
-}
-
-function clearMessage() {
-  $("message").style.display = "none";
-  $("message").textContent = "";
-}
-
-function setMode(nextMode) {
-  mode = nextMode;
-  clearMessage();
-
-  const signup = mode === "signup";
-  $("loginTab").classList.toggle("active", !signup);
-  $("signupTab").classList.toggle("active", signup);
-
-  $("name").hidden = !signup;
-  $("name").required = signup;
-  $("confirmWrap").hidden = !signup;
-  $("confirmPassword").required = signup;
-  $("forgotRow").hidden = signup;
-
-  $("formTitle").textContent = signup
-    ? "Create Your Account" : "Welcome Back!";
-  $("formDescription").textContent = signup
-    ? "Sign up for your Zero Prime account"
-    : "Login to your account";
-  $("submitBtn").textContent = signup ? "Create Account" : "Login";
-  $("password").autocomplete = signup ? "new-password" : "current-password";
-  $("switchText").innerHTML = signup
-    ? 'Already have an account? <a id="switchLink" href="#">Login</a>'
-    : 'Don\'t have an account? <a id="switchLink" href="#">Sign Up</a>';
-
-  $("switchLink").addEventListener("click", switchMode);
-}
-
-function switchMode(event) {
-  event.preventDefault();
-  setMode(mode === "login" ? "signup" : "login");
-}
-
-$("loginTab").addEventListener("click", () => setMode("login"));
-$("signupTab").addEventListener("click", () => setMode("signup"));
-$("switchLink").addEventListener("click", switchMode);
-
-$("forgotLink").addEventListener("click", async event => {
-  event.preventDefault();
-  clearMessage();
-
-  const email = $("email").value.trim();
-  if (!email) {
-    showMessage("Enter your email address first.");
-    $("email").focus();
-    return;
-  }
-
-  try {
-    await sendPasswordResetEmail(auth, email);
-    showMessage("If the account exists, a password reset email has been sent.", true);
-  } catch (error) {
-    showMessage("Could not send reset email. Check your email and Firebase settings.");
-    console.error(error);
-  }
-});
-
-$("authForm").addEventListener("submit", async event => {
-  event.preventDefault();
-  if (busy) return;
-
-  clearMessage();
-  const email = $("email").value.trim();
-  const password = $("password").value;
-
-  if (mode === "signup" &&
-      password !== $("confirmPassword").value) {
-    showMessage("Passwords do not match.");
-    return;
-  }
-
-  busy = true;
-  $("submitBtn").disabled = true;
-
-  try {
-    if (mode === "signup") {
-      const name = $("name").value.trim();
-      const credential = await createUserWithEmailAndPassword(
-        auth, email, password
-      );
-      await updateProfile(credential.user, { displayName: name });
-      showMessage("Account created successfully!", true);
-    } else {
-      await signInWithEmailAndPassword(auth, email, password);
-      showMessage("Login successful!", true);
-    }
-  } catch (error) {
-    const messages = {
-      "auth/email-already-in-use": "This email is already registered.",
-      "auth/invalid-email": "Please enter a valid email address.",
-      "auth/weak-password": "Choose a stronger password.",
-      "auth/invalid-credential": "Email or password is incorrect.",
-      "auth/network-request-failed": "Network error. Check your internet."
-    };
-    showMessage(messages[error.code] ||
-      "Authentication failed. Check Firebase setup and try again.");
-    console.error("Firebase Auth error:", error.code, error.message);
-  } finally {
-    busy = false;
-    $("submitBtn").disabled = false;
-  }
-});
-
-onAuthStateChanged(auth, user => {
-  if (user) {
-    $("authArea").hidden = true;
-    $("dashboard").hidden = false;
-    $("userEmail").textContent = user.email || "";
-  } else {
-    $("authArea").hidden = false;
-    $("dashboard").hidden = true;
-  }
-});
-
-$("logoutBtn").addEventListener("click", async () => {
-  try {
-    await signOut(auth);
-    setMode("login");
-  } catch (error) {
-    showMessage("Could not log out. Please try again.");
-    console.error(error);
-  }
-});
-</script>
-</body>
-</html>
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+// Your Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyARxTG_3Pst-s1jw9fBUZzpgtySfRRWheU",
   authDomain: "umar-prime-8fc22.firebaseapp.com",
@@ -303,6 +91,121 @@ const firebaseConfig = {
   measurementId: "G-QYTBC431KS"
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+const auth = getAuth(app);
+
+const $ = id => document.getElementById(id);
+let signup = false;
+let busy = false;
+
+function message(text, success = false) {
+  $("message").textContent = text;
+  $("message").style.color = success ? "#86efac" : "#fca5a5";
+}
+
+function setMode() {
+  signup = !signup;
+  $("name").hidden = !signup;
+  $("name").required = signup;
+  $("confirmWrap").hidden = !signup;
+  $("confirm").required = signup;
+  $("submit").textContent = signup ? "Sign Up" : "Login";
+  $("toggle").textContent = signup
+    ? "Already have an account? Login"
+    : "Create New Account / Sign Up";
+  $("forgot").parentElement.hidden = signup;
+  message("");
+}
+
+$("toggle").addEventListener("click", setMode);
+
+$("authForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  if (busy) return;
+
+  const email = $("email").value.trim();
+  const password = $("password").value;
+  busy = true;
+  $("submit").disabled = true;
+
+  try {
+    if (signup) {
+      if (password !== $("confirm").value) {
+        throw new Error("Passwords do not match.");
+      }
+
+      const result = await createUserWithEmailAndPassword(
+        auth, email, password
+      );
+
+      await updateProfile(result.user, {
+        displayName: $("name").value.trim()
+      });
+
+      message("Account created successfully!", true);
+    } else {
+      await signInWithEmailAndPassword(auth, email, password);
+      message("Login successful!", true);
+    }
+  } catch (err) {
+    const errors = {
+      "auth/email-already-in-use": "This email is already registered.",
+      "auth/invalid-email": "Please enter a valid email.",
+      "auth/weak-password": "Password must be at least 6 characters.",
+      "auth/invalid-credential": "Incorrect email or password.",
+      "auth/operation-not-allowed": "Enable Email/Password in Firebase Authentication."
+    };
+    message(errors[err.code] || err.message || "Authentication failed.");
+    console.error(err);
+  } finally {
+    busy = false;
+    $("submit").disabled = false;
+  }
+});
+
+$("forgot").addEventListener("click", async e => {
+  e.preventDefault();
+  const email = $("email").value.trim();
+
+  if (!email) {
+    message("Enter your email address first.");
+    $("email").focus();
+    return;
+  }
+
+  try {
+    await sendPasswordResetEmail(auth, email);
+    message("If the account exists, check your email for a reset link.", true);
+  } catch (err) {
+    message("Could not send reset email. Check Firebase settings.");
+    console.error(err);
+  }
+});
+
+onAuthStateChanged(auth, user => {
+  $("authForm").hidden = !!user;
+  $("toggle").hidden = !!user;
+  $("forgot").parentElement.hidden = !!user || signup;
+  $("account").hidden = !user;
+  $("welcome").textContent = user
+    ? "Signed in as " + user.email : "";
+});
+
+$("logout").addEventListener("click", async () => {
+  try {
+    await signOut(auth);
+    signup = false;
+    $("name").hidden = true;
+    $("name").required = false;
+    $("confirmWrap").hidden = true;
+    $("confirm").required = false;
+    $("submit").textContent = "Login";
+    $("toggle").textContent = "Create New Account / Sign Up";
+    message("Logged out successfully.", true);
+  } catch (err) {
+    message("Logout failed. Please try again.");
+  }
+});
+</script>
+</body>
+</html>
